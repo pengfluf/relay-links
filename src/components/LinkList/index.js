@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   createFragmentContainer,
   graphql,
@@ -20,6 +22,14 @@ function LinkList(props) {
     </div>
   );
 }
+
+LinkList.propTypes = {
+  viewer: PropTypes.shape({
+    allLinks: PropTypes.shape({
+      edges: PropTypes.array,
+    }),
+  }),
+};
 
 export default createFragmentContainer(LinkList, graphql`
   fragment LinkList_viewer on Viewer {

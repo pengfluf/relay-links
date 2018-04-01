@@ -6,6 +6,12 @@ import {
 } from 'react-relay';
 
 class Link extends React.Component {
+  constructor() {
+    super();
+
+    this.voteForLink = this.voteForLink.bind(this);
+  }
+
   async voteForLink() {
 
   }

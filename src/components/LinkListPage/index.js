@@ -6,14 +6,7 @@ import {
 
 import environment from '../../Environment';
 import LinkList from '../LinkList';
-
-const LinkListPageQuery = graphql`
-  query LinkListPageQuery {
-    viewer {
-      ...LinkList_viewer
-    }
-  }
-`;
+import LinkListPageQuery from '../../gql/queries/LinkListPageQuery';
 
 /* eslint-disable react/prefer-stateless-function */
 class LinkListPage extends React.Component {

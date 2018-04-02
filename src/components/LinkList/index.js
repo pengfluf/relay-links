@@ -12,9 +12,10 @@ function LinkList(props) {
   return (
     <div>
       {
-        props.viewer.allLinks.edges.map(({ node }) => (
+        props.viewer.allLinks.edges.map(({ node }, index) => (
           <LinkCustom
             key={node.__id}
+            index={index}
             link={node}
           />
         ))

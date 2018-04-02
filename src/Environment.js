@@ -9,7 +9,7 @@ const {
 
 const store = new Store(new RecordSource());
 
-const network = Network.create((operation, variables) => fetch('https://api.graph.cool/relay/v1/cjfi3b6ti1ffb0174azb9oyiq', {
+export const fetchQuery = (operation, variables) => fetch('https://api.graph.cool/relay/v1/cjfi3b6ti1ffb0174azb9oyiq', {
   method: 'POST',
   headers: {
     Accept: 'application/json',
@@ -20,7 +20,9 @@ const network = Network.create((operation, variables) => fetch('https://api.grap
     query: operation.text,
     variables,
   }),
-}).then((res) => res.json()));
+}).then((res) => res.json());
+
+const network = Network.create(fetchQuery);
 
 const environment = new Environment({
   network,

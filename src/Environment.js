@@ -30,21 +30,24 @@ export const fetchQuery = (operation, variables) => fetch(RELAY_API_URL, {
 const setupSubscription = (config, variables, cacheConfig, observer) => {
   const query = config.text;
 
-  const subscriptionClient = new SubscriptionClient(SUBSCRIPTION_URL, {
-    reconnect: true,
-  });
+  const subscriptionClient = new SubscriptionClient(
+    SUBSCRIPTION_URL,
+    { reconnect: true }
+  );
 
-  const client = subscriptionClient.request({ query, variables }).subscribe({
-    next: (result) => {
-      observer.onNext({ data: result.data });
-    },
-    complete: () => {
-      observer.onCompleted();
-    },
-    error: (error) => {
-      observer.onError(error);
-    },
-  });
+  const client = subscriptionClient
+    .request({ query, variables })
+    .subscribe({
+      next: (result) => {
+        observer.onNext({ data: result.data });
+      },
+      complete: () => {
+        observer.onCompleted();
+      },
+      error: (error) => {
+        observer.onError(error);
+      },
+    });
 
   return {
     dispose: client.unsubscribe,

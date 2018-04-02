@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash e17aa28a57715d22dea722a62400dd50
+ * @relayHash 6a4f92521363dd4a813d2ba74ba0f8e4
  */
 
 /* eslint-disable */
@@ -10,11 +10,11 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type LinkList_viewer$ref = any;
-export type LinkListPageQueryVariables = {|
+export type LinkListForwardQueryVariables = {|
   count: number,
   after?: ?string,
 |};
-export type LinkListPageQueryResponse = {|
+export type LinkListForwardQueryResponse = {|
   +viewer: {|
     +$fragmentRefs: LinkList_viewer$ref,
   |},
@@ -23,7 +23,7 @@ export type LinkListPageQueryResponse = {|
 
 
 /*
-query LinkListPageQuery(
+query LinkListForwardQuery(
   $count: Int!
   $after: String
 ) {
@@ -90,13 +90,13 @@ v1 = {
 return {
   "kind": "Request",
   "operationKind": "query",
-  "name": "LinkListPageQuery",
+  "name": "LinkListForwardQuery",
   "id": null,
-  "text": "query LinkListPageQuery(\n  $count: Int!\n  $after: String\n) {\n  viewer {\n    ...LinkList_viewer\n    id\n  }\n}\n\nfragment LinkList_viewer on Viewer {\n  allLinks(first: $count, after: $after, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...LinkCustom_link\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment LinkCustom_link on Link {\n  id\n  description\n  url\n  createdAt\n  postedBy {\n    id\n    name\n  }\n  votes {\n    count\n  }\n}\n",
+  "text": "query LinkListForwardQuery(\n  $count: Int!\n  $after: String\n) {\n  viewer {\n    ...LinkList_viewer\n    id\n  }\n}\n\nfragment LinkList_viewer on Viewer {\n  allLinks(first: $count, after: $after, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...LinkCustom_link\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment LinkCustom_link on Link {\n  id\n  description\n  url\n  createdAt\n  postedBy {\n    id\n    name\n  }\n  votes {\n    count\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "LinkListPageQuery",
+    "name": "LinkListForwardQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -121,7 +121,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "LinkListPageQuery",
+    "name": "LinkListForwardQuery",
     "argumentDefinitions": v0,
     "selections": [
       {
@@ -320,5 +320,5 @@ return {
   }
 };
 })();
-(node/*: any*/).hash = '77e6fc5df90cace077831e8256b9c1e2';
+(node/*: any*/).hash = 'bfd0d54a5ce304696b4bf3dde9140e7d';
 module.exports = node;

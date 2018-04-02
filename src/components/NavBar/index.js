@@ -15,19 +15,12 @@ function NavBar() {
     <div className="navbar">
 
       <NavLink
-        to="/new/1"
+        exact
+        to="/"
         className="navbar__link"
         activeClassName="navbar__link--active"
       >
-        New
-      </NavLink>
-
-      <NavLink
-        to="/top"
-        className="navbar__link"
-        activeClassName="navbar__link--active"
-      >
-        Top
+        Home
       </NavLink>
 
       {

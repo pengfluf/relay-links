@@ -18,6 +18,10 @@ export type LinkList_viewer = {|
         +$fragmentRefs: LinkCustom_link$ref,
       |},
     |}>,
+    +pageInfo: ?{|
+      +hasNextPage: ?boolean,
+      +endCursor: ?string,
+    |},
   |},
   +$refType: LinkList_viewer$ref,
 |};
@@ -31,23 +35,41 @@ const node/*: ConcreteFragment*/ = {
   "metadata": {
     "connection": [
       {
-        "count": null,
-        "cursor": null,
-        "direction": "backward",
+        "count": "count",
+        "cursor": "after",
+        "direction": "forward",
         "path": [
           "allLinks"
         ]
       }
     ]
   },
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "kind": "RootArgument",
+      "name": "count",
+      "type": "Int"
+    },
+    {
+      "kind": "RootArgument",
+      "name": "after",
+      "type": "String"
+    }
+  ],
   "selections": [
     {
       "kind": "LinkedField",
       "alias": "allLinks",
       "name": "__LinkList_allLinks_connection",
-      "storageKey": null,
-      "args": null,
+      "storageKey": "__LinkList_allLinks_connection(orderBy:\"createdAt_DESC\")",
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "orderBy",
+          "value": "createdAt_DESC",
+          "type": "LinkOrderBy"
+        }
+      ],
       "concreteType": "LinkConnection",
       "plural": false,
       "selections": [
@@ -104,14 +126,14 @@ const node/*: ConcreteFragment*/ = {
             {
               "kind": "ScalarField",
               "alias": null,
-              "name": "hasPreviousPage",
+              "name": "hasNextPage",
               "args": null,
               "storageKey": null
             },
             {
               "kind": "ScalarField",
               "alias": null,
-              "name": "startCursor",
+              "name": "endCursor",
               "args": null,
               "storageKey": null
             }
@@ -121,5 +143,5 @@ const node/*: ConcreteFragment*/ = {
     }
   ]
 };
-(node/*: any*/).hash = '3b5bdc7610801d7b04d1c14f969986df';
+(node/*: any*/).hash = 'db2b4abdc425cda0d5e17e26f8507db0';
 module.exports = node;

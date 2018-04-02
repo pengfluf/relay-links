@@ -2,16 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  createFragmentContainer,
+  createPaginationContainer,
   graphql,
 } from 'react-relay';
 import NewVoteSubscription from '../../gql/subscriptions/NewVoteSubscription';
 
+import { ITEMS_PER_PAGE } from '../../constants';
+
 import LinkCustom from '../LinkCustom';
 
 class LinkList extends React.Component {
+  constructor() {
+    super();
+
+    this.loadMore = this.loadMore.bind(this);
+  }
+
   componentDidMount() {
     NewVoteSubscription();
+  }
+
+  loadMore() {
+    if (!this.props.relay.hasMore()) {
+      console.log('Nothing more to load');
+      return;
+    } else if (this.props.relay.isLoading()) {
+      console.log('Request is already pending');
+      return;
+    }
+
+    this.props.relay.loadMore(ITEMS_PER_PAGE);
   }
 
   render() {
@@ -26,6 +46,16 @@ class LinkList extends React.Component {
             />
           ))
         }
+        {
+          this.props.relay.hasMore() ?
+            <button
+              onClick={this.loadMore}
+            >
+            Load More
+            </button>
+            :
+            null
+        }
       </div>
     );
   }
@@ -37,16 +67,66 @@ LinkList.propTypes = {
       edges: PropTypes.array,
     }),
   }),
+  relay: PropTypes.shape({
+    hasMore: PropTypes.func,
+    isLoading: PropTypes.func,
+    loadMore: PropTypes.func,
+  }),
 };
 
-export default createFragmentContainer(LinkList, graphql`
-  fragment LinkList_viewer on Viewer {
-    allLinks(last: 100, orderBy: createdAt_DESC) @connection(key: "LinkList_allLinks", filters: []) {
-      edges {
-        node {
-          ...LinkCustom_link
+export default createPaginationContainer(
+  LinkList,
+  {
+    viewer: graphql`
+      fragment LinkList_viewer on Viewer {
+        allLinks(
+          first: $count,
+          after: $after,
+          orderBy: createdAt_DESC
+        ) @connection(key: "LinkList_allLinks") {
+          edges {
+            node {
+              ...LinkCustom_link
+            }
+          }
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
         }
       }
+    `,
+  },
+  {
+    direction: 'forward',
+
+    query: graphql`
+    query LinkListForwardQuery(
+      $count: Int!,
+      $after: String,
+    ) {
+      viewer {
+        ...LinkList_viewer
+      }
     }
+  `,
+
+    getConnectionFromProps(props) {
+      return props.viewer && props.viewer.allLinks;
+    },
+
+    getFragmentVariables(previousVariables, totalCount) {
+      return {
+        ...previousVariables,
+        count: totalCount,
+      };
+    },
+
+    getVariables(props, paginationInfo, fragmentVariables) {
+      return {
+        count: paginationInfo.count,
+        after: paginationInfo.cursor,
+      };
+    },
   }
-`);
+);

@@ -2,7 +2,10 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-import { GC_USER_ID } from '../../constants';
+import {
+  GC_USER_ID,
+  GC_AUTH_TOKEN,
+} from '../../constants';
 
 import './style.css';
 
@@ -53,7 +56,8 @@ function NavBar() {
             to="/"
             className="navbar__link"
             onClick={() => {
-              localStorage.removeItem(AUTH_TOKEN);
+              localStorage.removeItem(GC_USER_ID);
+              localStorage.removeItem(GC_AUTH_TOKEN);
             }}
           >
             Logout

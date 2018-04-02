@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { GC_USER_ID } from '../../constants';
 import { handleChangeInput } from '../../utils';
 import CreateLinkMutation from '../../gql/mutations/CreateLinkMutation';
 
@@ -18,6 +19,12 @@ class CreateLink extends React.Component {
   }
 
   createLink() {
+    const postedById = localStorage.getItem(GC_USER_ID);
+    if (!postedById) {
+      console.error('No user logged in');
+      return;
+    }
+
     const {
       description,
       url,

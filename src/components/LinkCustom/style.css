@@ -1,0 +1,14 @@
+.linkCustom__vote {
+  margin-left: 10px;
+
+  cursor: pointer;
+
+  border: 1px solid darkorange;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.linkCustom__vote:hover {
+  color: white;
+  background-color: coral;
+}

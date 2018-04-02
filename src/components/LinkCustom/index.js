@@ -11,6 +11,8 @@ import { fetchQuery } from '../../Environment';
 import { GC_USER_ID } from '../../constants';
 import { timeDifferenceForDate } from '../../utils';
 
+import './style.css';
+
 class LinkCustom extends React.Component {
   constructor() {
     super();

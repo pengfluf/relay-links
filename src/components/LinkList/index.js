@@ -5,23 +5,30 @@ import {
   createFragmentContainer,
   graphql,
 } from 'react-relay';
+import NewVoteSubscription from '../../gql/subscriptions/NewVoteSubscription';
 
 import LinkCustom from '../LinkCustom';
 
-function LinkList(props) {
-  return (
-    <div>
-      {
-        props.viewer.allLinks.edges.map(({ node }, index) => (
-          <LinkCustom
-            key={node.__id}
-            index={index}
-            link={node}
-          />
-        ))
-      }
-    </div>
-  );
+class LinkList extends React.Component {
+  componentDidMount() {
+    NewVoteSubscription();
+  }
+
+  render() {
+    return (
+      <div>
+        {
+          this.props.viewer.allLinks.edges.map(({ node }, index) => (
+            <LinkCustom
+              key={node.__id}
+              index={index}
+              link={node}
+            />
+          ))
+        }
+      </div>
+    );
+  }
 }
 
 LinkList.propTypes = {

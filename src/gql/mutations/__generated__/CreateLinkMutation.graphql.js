@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3884462e6b3c114a4cd4814d051fafa4
+ * @relayHash 883b9ff07cb10827bbf78c2787a193e6
  */
 
 /* eslint-disable */
@@ -28,6 +28,10 @@ export type CreateLinkMutationResponse = {|
       +createdAt: any,
       +url: string,
       +description: string,
+      +postedBy: ?{|
+        +id: string,
+        +name: string,
+      |},
     |},
   |},
 |};
@@ -44,6 +48,10 @@ mutation CreateLinkMutation(
       createdAt
       url
       description
+      postedBy {
+        id
+        name
+      }
     }
   }
 }
@@ -58,7 +66,14 @@ var v0 = [
     "defaultValue": null
   }
 ],
-v1 = [
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v2 = [
   {
     "kind": "LinkedField",
     "alias": null,
@@ -84,13 +99,7 @@ v1 = [
         "concreteType": "Link",
         "plural": false,
         "selections": [
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "id",
-            "args": null,
-            "storageKey": null
-          },
+          v1,
           {
             "kind": "ScalarField",
             "alias": null,
@@ -111,6 +120,25 @@ v1 = [
             "name": "description",
             "args": null,
             "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "postedBy",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "User",
+            "plural": false,
+            "selections": [
+              v1,
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "name",
+                "args": null,
+                "storageKey": null
+              }
+            ]
           }
         ]
       }
@@ -122,7 +150,7 @@ return {
   "operationKind": "mutation",
   "name": "CreateLinkMutation",
   "id": null,
-  "text": "mutation CreateLinkMutation(\n  $input: CreateLinkInput!\n) {\n  createLink(input: $input) {\n    link {\n      id\n      createdAt\n      url\n      description\n    }\n  }\n}\n",
+  "text": "mutation CreateLinkMutation(\n  $input: CreateLinkInput!\n) {\n  createLink(input: $input) {\n    link {\n      id\n      createdAt\n      url\n      description\n      postedBy {\n        id\n        name\n      }\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -130,15 +158,15 @@ return {
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
-    "selections": v1
+    "selections": v2
   },
   "operation": {
     "kind": "Operation",
     "name": "CreateLinkMutation",
     "argumentDefinitions": v0,
-    "selections": v1
+    "selections": v2
   }
 };
 })();
-(node/*: any*/).hash = 'ec2c3b8306191c14a7a6ff0622a5c925';
+(node/*: any*/).hash = 'd22b3969c1b8e2ddb195aa586f278f93';
 module.exports = node;

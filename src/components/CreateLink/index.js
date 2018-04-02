@@ -31,7 +31,9 @@ class CreateLink extends React.Component {
     } = this.state;
 
     CreateLinkMutation(
-      description, url,
+      postedById,
+      description,
+      url,
       () => this.props.history.push('/')
     );
   }

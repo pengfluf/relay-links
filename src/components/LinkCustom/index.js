@@ -5,7 +5,7 @@ import {
   graphql,
 } from 'react-relay';
 
-class Link extends React.Component {
+class LinkCustom extends React.Component {
   constructor() {
     super();
 
@@ -26,15 +26,15 @@ class Link extends React.Component {
   }
 }
 
-Link.propTypes = {
+LinkCustom.propTypes = {
   link: PropTypes.shape({
     description: PropTypes.string,
     url: PropTypes.string,
   }),
 };
 
-export default createFragmentContainer(Link, graphql`
-  fragment Link_link on Link {
+export default createFragmentContainer(LinkCustom, graphql`
+  fragment LinkCustom_link on Link {
     id
     description
     url

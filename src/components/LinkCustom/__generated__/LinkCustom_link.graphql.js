@@ -9,19 +9,19 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from 'relay-runtime';
-declare export opaque type Link_link$ref: FragmentReference;
-export type Link_link = {|
+declare export opaque type LinkCustom_link$ref: FragmentReference;
+export type LinkCustom_link = {|
   +id: string,
   +description: string,
   +url: string,
-  +$refType: Link_link$ref,
+  +$refType: LinkCustom_link$ref,
 |};
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "Link_link",
+  "name": "LinkCustom_link",
   "type": "Link",
   "metadata": null,
   "argumentDefinitions": [],
@@ -49,5 +49,5 @@ const node/*: ConcreteFragment*/ = {
     }
   ]
 };
-(node/*: any*/).hash = '4db5e0eb9875bd761c8f8ef68ea507f3';
+(node/*: any*/).hash = '5d6ca82c78848484851901c233c4afbf';
 module.exports = node;

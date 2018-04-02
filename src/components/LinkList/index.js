@@ -6,14 +6,14 @@ import {
   graphql,
 } from 'react-relay';
 
-import Link from '../Link';
+import LinkCustom from '../LinkCustom';
 
 function LinkList(props) {
   return (
     <div>
       {
         props.viewer.allLinks.edges.map(({ node }) => (
-          <Link
+          <LinkCustom
             key={node.__id}
             link={node}
           />
@@ -36,7 +36,7 @@ export default createFragmentContainer(LinkList, graphql`
     allLinks(last: 100, orderBy: createdAt_DESC) @connection(key: "LinkList_allLinks", filters: []) {
       edges {
         node {
-          ...Link_link
+          ...LinkCustom_link
         }
       }
     }

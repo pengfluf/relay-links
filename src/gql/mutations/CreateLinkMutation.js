@@ -12,7 +12,7 @@ const mutation = graphql`
         createdAt
         url
         description
-        postedById {
+        postedBy {
           id
           name
         }

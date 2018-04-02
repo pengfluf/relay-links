@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f809b1080774cfada1f8b44659c58a7a
+ * @relayHash 1c85d49bdd2af64aed029581b2f62038
  */
 
 /* eslint-disable */
@@ -31,7 +31,7 @@ fragment LinkList_viewer on Viewer {
   allLinks(last: 100, orderBy: createdAt_DESC) {
     edges {
       node {
-        ...Link_link
+        ...LinkCustom_link
         id
         __typename
       }
@@ -44,7 +44,7 @@ fragment LinkList_viewer on Viewer {
   }
 }
 
-fragment Link_link on Link {
+fragment LinkCustom_link on Link {
   id
   description
   url
@@ -64,7 +64,7 @@ return {
   "operationKind": "query",
   "name": "LinkListPageQuery",
   "id": null,
-  "text": "query LinkListPageQuery {\n  viewer {\n    ...LinkList_viewer\n    id\n  }\n}\n\nfragment LinkList_viewer on Viewer {\n  allLinks(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...Link_link\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Link_link on Link {\n  id\n  description\n  url\n}\n",
+  "text": "query LinkListPageQuery {\n  viewer {\n    ...LinkList_viewer\n    id\n  }\n}\n\nfragment LinkList_viewer on Viewer {\n  allLinks(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...LinkCustom_link\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment LinkCustom_link on Link {\n  id\n  description\n  url\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",

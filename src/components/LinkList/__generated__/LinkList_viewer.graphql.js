@@ -8,14 +8,14 @@
 
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
-type Link_link$ref = any;
+type LinkCustom_link$ref = any;
 import type { FragmentReference } from 'relay-runtime';
 declare export opaque type LinkList_viewer$ref: FragmentReference;
 export type LinkList_viewer = {|
   +allLinks: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
-        +$fragmentRefs: Link_link$ref,
+        +$fragmentRefs: LinkCustom_link$ref,
       |},
     |}>,
   |},
@@ -71,7 +71,7 @@ const node/*: ConcreteFragment*/ = {
               "selections": [
                 {
                   "kind": "FragmentSpread",
-                  "name": "Link_link",
+                  "name": "LinkCustom_link",
                   "args": null
                 },
                 {
@@ -121,5 +121,5 @@ const node/*: ConcreteFragment*/ = {
     }
   ]
 };
-(node/*: any*/).hash = 'c8b60409488c6ebd4c9f08f9c5eb8395';
+(node/*: any*/).hash = '3b5bdc7610801d7b04d1c14f969986df';
 module.exports = node;

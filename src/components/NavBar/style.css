@@ -3,6 +3,8 @@
 }
 
 .navbar__link {
+  font-size: 19px;
+
   margin-left: 20px;
 
   text-decoration: none;
@@ -13,5 +15,7 @@
 }
 
 .navbar__link--active {
+  font-weight: bold;
+
   text-decoration: underline;
 }

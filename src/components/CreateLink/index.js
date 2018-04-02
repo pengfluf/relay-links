@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { handleChangeInput } from '../../utils';
 import CreateLinkMutation from '../../gql/mutations/CreateLinkMutation';
@@ -24,7 +25,7 @@ class CreateLink extends React.Component {
 
     CreateLinkMutation(
       description, url,
-      () => console.log('Mutation completed')
+      () => this.props.history.push('/')
     );
   }
 
@@ -55,4 +56,11 @@ class CreateLink extends React.Component {
     );
   }
 }
+
+CreateLink.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+};
+
 export default CreateLink;

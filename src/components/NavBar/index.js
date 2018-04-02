@@ -2,13 +2,12 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-import { AUTH_TOKEN } from '../Login/constants';
+import { GC_USER_ID } from '../../constants';
 
 import './style.css';
 
 function NavBar() {
-  // const authToken = localStorage.getItem(AUTH_TOKEN);
-  const authToken = 1;
+  const userID = localStorage.getItem(GC_USER_ID);
   return (
     <div className="navbar">
 
@@ -29,7 +28,7 @@ function NavBar() {
       </NavLink>
 
       {
-        authToken && (
+        userID && (
           <NavLink
             to="/create"
             className="navbar__link"
@@ -49,7 +48,7 @@ function NavBar() {
       </NavLink>
 
       {
-        authToken ? (
+        userID ? (
           <Link
             to="/"
             className="navbar__link"

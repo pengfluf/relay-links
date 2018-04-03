@@ -19,7 +19,7 @@ Start the application at localhost:3000
 ``` bash
 yarn start
 ```
-
+OR
 ``` bash
 npm install
 ```

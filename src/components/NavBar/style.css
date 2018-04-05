@@ -1,13 +1,26 @@
 .navbar {
   display: flex;
+
+  padding-right: 20px;
+  padding-left: 20px;
+
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+
+  justify-content: flex-end;
+}
+
+.navbar__link-wrapper {
+  padding-top: 17px;
+  padding-bottom: 17px;
+  padding-left: 20px;
 }
 
 .navbar__link {
-  font-size: 19px;
-
-  margin-left: 20px;
+  font-size: 17px;
 
   text-decoration: none;
+
+  color: rgba(0,0,0,0.54);
 }
 
 .navbar__link:first-of-type {
@@ -15,7 +28,5 @@
 }
 
 .navbar__link--active {
-  font-weight: bold;
-
-  text-decoration: underline;
+  color: rgba(255, 100, 100, 1);
 }

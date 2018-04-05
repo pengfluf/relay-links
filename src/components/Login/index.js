@@ -5,6 +5,8 @@ import { handleChangeInput } from '../../utils';
 import SignInUserMutation from '../../gql/mutations/SignInUserMutation';
 import CreateUserMutation from '../../gql/mutations/CreateUserMutation';
 
+import './style.css';
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -71,52 +73,63 @@ class Login extends React.Component {
       name,
     } = this.state;
     return (
-      <div>
-        <h2>{login ? 'Login' : 'SignUp'}</h2>
+      <div className="login">
+        <h2 className="login__title">{login ? 'Login' : 'SignUp'}</h2>
 
-        <div>
-          {
-            !login && (
-              <input
-                value={name}
-                onChange={(e) =>
-                  handleChangeInput('name', e.target.value, this.setState)}
-                type="text"
-                placeholder="Your name"
-              />
-            )
-          }
-          <input
-            value={email}
-            onChange={(e) =>
-              handleChangeInput('email', e.target.value, this.setState)}
-            type="text"
-            placeholder="Your email address"
-          />
-          <input
-            value={password}
-            onChange={(e) =>
-              handleChangeInput('password', e.target.value, this.setState)}
-            type="password"
-            placeholder="Your password"
-          />
-        </div>
-
-        <div>
-          <button
-            onClick={this.confirm}
-          >
-            {login ? 'login' : 'create account'}
-          </button>
-          <button
-            onClick={this.switchUI}
-          >
+        <div className="login__content">
+          <div className="login__fields">
             {
-              login ?
-                'need to create an account?' :
-                'already have an account?'
+              !login && (
+                <input
+                  className="login__field"
+                  value={name}
+                  onChange={(e) =>
+                    handleChangeInput('name', e.target.value, this.setState)}
+                  type="text"
+                  placeholder="Name"
+                />
+              )
             }
-          </button>
+            <input
+              className="login__field"
+              value={email}
+              onChange={(e) =>
+                handleChangeInput('email', e.target.value, this.setState)}
+              type="text"
+              placeholder={
+                login ? 'test@test.com' : 'Email'
+              }
+            />
+            <input
+              className="login__field"
+              value={password}
+              onChange={(e) =>
+                handleChangeInput('password', e.target.value, this.setState)}
+              type="password"
+              placeholder={
+                login ? '123456' : 'Password'
+              }
+            />
+          </div>
+
+          <div className="login__buttons">
+            <button
+              className="btn btn--login"
+              onClick={this.confirm}
+            >
+              {login ? 'login' : 'create account'}
+            </button>
+            <button
+              className="login__changeui"
+              onClick={this.switchUI}
+            >
+              {
+                login ?
+                  'I don\'t have an account' :
+                  'I already have an account'
+              }
+            </button>
+          </div>
         </div>
 
       </div>

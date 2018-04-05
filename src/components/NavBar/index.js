@@ -14,55 +14,56 @@ function NavBar() {
   return (
     <div className="navbar">
 
-      <NavLink
-        exact
-        to="/"
-        className="navbar__link"
-        activeClassName="navbar__link--active"
-      >
-        Home
-      </NavLink>
+      <li className="navbar__link-wrapper">
+        <NavLink
+          exact
+          to="/"
+          className="navbar__link"
+          activeClassName="navbar__link--active"
+        >
+    Home
+        </NavLink>
+      </li>
+
 
       {
         userID && (
-          <NavLink
-            to="/create"
-            className="navbar__link"
-            activeClassName="navbar__link--active"
-          >
+          <li className="navbar__link-wrapper">
+            <NavLink
+              to="/create"
+              className="navbar__link"
+              activeClassName="navbar__link--active"
+            >
               Create New Link
-          </NavLink>
+            </NavLink>
+          </li>
         )
       }
 
-      <NavLink
-        to="/search"
-        className="navbar__link"
-        activeClassName="navbar__link--active"
-      >
-        Search
-      </NavLink>
-
       {
         userID ? (
-          <Link
-            to="/"
-            className="navbar__link"
-            onClick={() => {
-              localStorage.removeItem(GC_USER_ID);
-              localStorage.removeItem(GC_AUTH_TOKEN);
-            }}
-          >
+          <li className="navbar__link-wrapper">
+            <Link
+              to="/"
+              className="navbar__link"
+              onClick={() => {
+                localStorage.removeItem(GC_USER_ID);
+                localStorage.removeItem(GC_AUTH_TOKEN);
+              }}
+            >
             Logout
-          </Link>
+            </Link>
+          </li>
         ) : (
-          <NavLink
-            to="/login"
-            className="navbar__link"
-            activeClassName="navbar__link--active"
-          >
+          <li className="navbar__link-wrapper">
+            <NavLink
+              to="/login"
+              className="navbar__link"
+              activeClassName="navbar__link--active"
+            >
             Login
-          </NavLink>
+            </NavLink>
+          </li>
         )
       }
 

@@ -70,9 +70,8 @@ class LinkCustom extends React.Component {
     } = this.props;
     return (
       <div className="linkCustom">
-
         <div>
-          <span>{index + 1}</span>
+          <span>{link.votes.count} votes</span>
           {
             userId && (
               <button
@@ -85,12 +84,18 @@ class LinkCustom extends React.Component {
           }
         </div>
 
-        <div>
-          <div>
-            {link.description} ({link.url})
+        <div className="linkCustom__content">
+          <div className="linkCustom__info">
+            <a href={`https://${link.url}`} className="linkCustom__description">
+              {link.description}
+            </a>
+            <a href={`https://${link.url}`} className="linkCustom__url">
+            ({link.url})
+            </a>
           </div>
-          <div>
-            {link.votes.count} votes | by{' '}
+          <div className="linkCustom__author">
+            by
+            {' '}
             {
               link.postedBy ?
                 link.postedBy.name :

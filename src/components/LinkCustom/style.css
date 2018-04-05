@@ -12,3 +12,28 @@
   color: white;
   background-color: coral;
 }
+
+.linkCustom__info {
+  display: flex;
+
+  align-items: center;
+}
+
+.linkCustom__description,
+.linkCustom__url {
+  text-decoration: none;
+
+  color: #212121;
+}
+
+.linkCustom__url {
+  font-size: 12px;
+
+  margin-left: 10px;
+
+  color: rgba(33, 33, 33, 0.6);
+}
+
+.linkCustom__url:hover {
+  text-decoration: underline;
+}

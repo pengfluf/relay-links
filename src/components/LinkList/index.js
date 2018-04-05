@@ -11,6 +11,8 @@ import { ITEMS_PER_PAGE } from '../../constants';
 
 import LinkCustom from '../LinkCustom';
 
+import './style.css';
+
 class LinkList extends React.Component {
   constructor() {
     super();
@@ -50,8 +52,9 @@ class LinkList extends React.Component {
           this.props.relay.hasMore() ?
             <button
               onClick={this.loadMore}
+              className="btn btn--loadmore"
             >
-            Load More
+              Load More
             </button>
             :
             null

@@ -37,3 +37,26 @@ export function timeDifferenceForDate(date) {
   const updated = new Date(date).getTime();
   return timeDifference(now, updated);
 }
+
+export function normalizeURL(url) {
+  const filters = ['www.', 'http://', 'https://'];
+  let normalizedURL = '';
+
+  filters.forEach((filter) => {
+    if (url.includes(filter)) {
+      switch (filter) {
+        case 'www.':
+          normalizedURL = `//${url}`;
+          break;
+        case 'http://':
+        case 'https://':
+          normalizedURL = url;
+          break;
+        default:
+          normalizedURL = `https://${url}`;
+      }
+    }
+  });
+
+  return normalizedURL;
+}

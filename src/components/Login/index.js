@@ -20,6 +20,7 @@ class Login extends React.Component {
 
     this.setState = this.setState.bind(this);
     this.confirm = this.confirm.bind(this);
+    this.confirmOnEnter = this.confirmOnEnter.bind(this);
     this.saveUserData = this.saveUserData.bind(this);
     this.switchUI = this.switchUI.bind(this);
   }
@@ -54,6 +55,12 @@ class Login extends React.Component {
     }
   }
 
+  confirmOnEnter(keyCode) {
+    if (keyCode === 13) {
+      this.confirm();
+    }
+  }
+
   saveUserData(id, token) {
     localStorage.setItem(GC_USER_ID, id);
     localStorage.setItem(GC_AUTH_TOKEN, token);
@@ -74,7 +81,9 @@ class Login extends React.Component {
     } = this.state;
     return (
       <div className="login">
-        <h2 className="login__title">{login ? 'Login' : 'SignUp'}</h2>
+        <h2 className="section-title">
+          {login ? 'Login' : 'SignUp'}
+        </h2>
 
         <div className="login__content">
           <div className="login__fields">
@@ -83,6 +92,7 @@ class Login extends React.Component {
                 <input
                   className="login__field"
                   value={name}
+                  onKeyUp={(e) => this.confirmOnEnter(e.keyCode)}
                   onChange={(e) =>
                     handleChangeInput('name', e.target.value, this.setState)}
                   type="text"
@@ -93,6 +103,7 @@ class Login extends React.Component {
             <input
               className="login__field"
               value={email}
+              onKeyUp={(e) => this.confirmOnEnter(e.keyCode)}
               onChange={(e) =>
                 handleChangeInput('email', e.target.value, this.setState)}
               type="text"
@@ -103,6 +114,7 @@ class Login extends React.Component {
             <input
               className="login__field"
               value={password}
+              onKeyUp={(e) => this.confirmOnEnter(e.keyCode)}
               onChange={(e) =>
                 handleChangeInput('password', e.target.value, this.setState)}
               type="password"

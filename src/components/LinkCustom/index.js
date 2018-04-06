@@ -9,7 +9,10 @@ import CreateVoteMutation from '../../gql/mutations/CreateVoteMutation';
 import { fetchQuery } from '../../Environment';
 
 import { GC_USER_ID } from '../../constants';
-import { timeDifferenceForDate } from '../../utils';
+import {
+  timeDifferenceForDate,
+  normalizeURL,
+} from '../../utils';
 
 import './style.css';
 
@@ -17,8 +20,14 @@ class LinkCustom extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      voteErrorShowed: false,
+      voteErrorTimeout: 0,
+    };
+
     this.userCanVoteOnLink = this.userCanVoteOnLink.bind(this);
     this.voteForLink = this.voteForLink.bind(this);
+    this.setState = this.setState.bind(this);
   }
 
   async userCanVoteOnLink(userId, linkId) {
@@ -45,6 +54,46 @@ class LinkCustom extends React.Component {
     return result.data.viewer.allVotes.edges.length === 0;
   }
 
+  handleVoteError() {
+    const {
+      voteErrorTimeout,
+    } = this.state;
+
+    // We should be sure that the timer
+    // isn't counting right now, because
+    // we don't want to break it
+    if (voteErrorTimeout === 0) {
+      // Declare basic variables
+      const initialTime = 3000;
+      const timeStep = 1000;
+
+      // Start recording the countdown
+      // in the state and show the error
+      this.setState({
+        voteErrorTimeout: initialTime,
+        voteErrorShowed: true,
+      });
+
+      // Every "timeStep" substract the "timeStep"
+      // from the "voteErrorTimeout"
+      const timerID = setInterval(() => {
+        this.setState((prevState) => ({
+          voteErrorTimeout: prevState.voteErrorTimeout - timeStep,
+        }));
+      }, timeStep);
+
+
+      // Clear the interval and
+      // hide the error
+      setTimeout(() => {
+        clearInterval(timerID);
+        this.setState({
+          voteErrorShowed: false,
+        });
+      }, initialTime);
+    }
+  }
+
   async voteForLink() {
     const userId = localStorage.getItem(GC_USER_ID);
     if (!userId) {
@@ -58,38 +107,57 @@ class LinkCustom extends React.Component {
     if (canUserVoteOnLink) {
       CreateVoteMutation(userId, linkId);
     } else {
-      console.log('You\'ve already voted for this link.');
+      this.handleVoteError();
     }
   }
 
   render() {
     const userId = localStorage.getItem(GC_USER_ID);
     const {
-      index,
       link,
     } = this.props;
+    const { voteErrorShowed } = this.state;
     return (
       <div className="linkCustom">
-        <div>
-          <span>{link.votes.count} votes</span>
+        <div className="linkCustom__votes">
+          <div className="linkCustom__votes-count">
+            {link.votes.count}
+            {
+              link.votes.count === 1 ?
+                ' vote' : ' votes'
+            }
+          </div>
           {
             userId && (
               <button
-                className="linkCustom__vote"
+                className="linkCustom__vote-button"
                 onClick={this.voteForLink}
               >
                 ▲
               </button>
             )
           }
+          {
+            voteErrorShowed && (
+              <div className="linkCustom__vote-error">
+                You have already voted for this link.
+              </div>
+            )
+          }
         </div>
 
         <div className="linkCustom__content">
           <div className="linkCustom__info">
-            <a href={`https://${link.url}`} className="linkCustom__description">
+            <a
+              href={normalizeURL(link.url)}
+              className="linkCustom__description"
+            >
               {link.description}
             </a>
-            <a href={`https://${link.url}`} className="linkCustom__url">
+            <a
+              href={normalizeURL(link.url)}
+              className="linkCustom__url"
+            >
             ({link.url})
             </a>
           </div>
@@ -117,7 +185,6 @@ LinkCustom.propTypes = {
     description: PropTypes.string,
     url: PropTypes.string,
   }),
-  index: PropTypes.number,
 };
 
 export default createFragmentContainer(LinkCustom, graphql`

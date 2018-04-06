@@ -2,6 +2,7 @@
 
 body {
   font-family: "PT Sans", Arial, sans-serif;
+  line-height: 1;
 
   margin: 0;
   padding: 0;
@@ -46,6 +47,25 @@ img {
 
   max-width: 100%;
   height: auto;
+}
+
+input[type^="text"],
+input[type^="password"] {
+  padding: 8px 15px;
+
+  border-width: 1px;
+  border-radius: 3px;
+}
+
+input[type^="text"]:not(:first-child),
+input[type^="password"]:not(:first-child) {
+  margin-left: 10px;
+}
+
+.section-title {
+  font-size: 28px;
+
+  text-align: center;
 }
 
 .btn {

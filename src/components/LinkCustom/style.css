@@ -1,16 +1,54 @@
-.linkCustom__vote {
+.linkCustom {
+  margin-top: 40px;
+}
+
+.linkCustom:first-of-type {
+  margin-top: 20px;
+}
+
+.linkCustom__votes {
+  display: flex;
+
+  align-items: center;
+}
+
+.linkCustom__votes-count {
+  font-size: 14px;
+}
+
+.linkCustom__vote-button {
   margin-left: 10px;
 
   cursor: pointer;
 
   border: 1px solid darkorange;
   border-radius: 5px;
+  outline: none;
   background-color: transparent;
 }
 
-.linkCustom__vote:hover {
+.linkCustom__vote-button:hover,
+.linkCustom__vote-button--active {
   color: white;
   background-color: coral;
+}
+
+.linkCustom__vote-error {
+  margin-left: 10px;
+
+  animation: vote-error 3s;
+
+  opacity: 0;
+}
+
+.linkCustom__info {
+  margin-top: 10px;
+}
+
+.linkCustom__author {
+  font-size: 12px;
+
+  margin-top: 10px;
 }
 
 .linkCustom__info {
@@ -36,4 +74,14 @@
 
 .linkCustom__url:hover {
   text-decoration: underline;
+}
+
+@keyframes vote-error {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }

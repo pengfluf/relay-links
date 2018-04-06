@@ -5,26 +5,11 @@
   align-items: center;
 }
 
-.login__title {
-  font-size: 28px;
-}
-
 .login__content {
   margin-top: 25px;
 }
 
 .login__fields {
-}
-
-.login__field {
-  padding: 8px 15px;
-
-  border-width: 1px;
-  border-radius: 3px;
-}
-
-.login__field:not(:first-child) {
-  margin-left: 10px;
 }
 
 .login__buttons {

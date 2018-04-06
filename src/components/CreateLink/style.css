@@ -1,0 +1,15 @@
+.createLink {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.createLink__content {
+  margin-top: 25px;
+}
+
+.btn--createLink {
+  width: 100%;
+  margin-top: 10px;
+}

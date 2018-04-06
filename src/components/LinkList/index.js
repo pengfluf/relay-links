@@ -17,6 +17,10 @@ class LinkList extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      isLoading: false,
+    };
+
     this.loadMore = this.loadMore.bind(this);
   }
 
@@ -25,6 +29,7 @@ class LinkList extends React.Component {
   }
 
   loadMore() {
+    this.setState({ isLoading: true });
     if (!this.props.relay.hasMore()) {
       console.log('Nothing more to load');
       return;
@@ -33,17 +38,24 @@ class LinkList extends React.Component {
       return;
     }
 
-    this.props.relay.loadMore(ITEMS_PER_PAGE);
+    this.props.relay.loadMore(
+      ITEMS_PER_PAGE,
+      () => {
+        this.setState({ isLoading: false });
+      }
+    );
   }
 
   render() {
     return (
       <div>
+        <h2 className="section-title">
+          Link List
+        </h2>
         {
-          this.props.viewer.allLinks.edges.map(({ node }, index) => (
+          this.props.viewer.allLinks.edges.map(({ node }) => (
             <LinkCustom
               key={node.__id}
-              index={index}
               link={node}
             />
           ))
@@ -54,7 +66,12 @@ class LinkList extends React.Component {
               onClick={this.loadMore}
               className="btn btn--loadmore"
             >
-              Load More
+              {
+                this.state.isLoading ?
+                  'Loading...'
+                  :
+                  'Load More'
+              }
             </button>
             :
             null

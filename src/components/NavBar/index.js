@@ -9,7 +9,7 @@ import {
 
 import './style.css';
 
-function NavBar() {
+function NavBar(props) {
   const userID = localStorage.getItem(GC_USER_ID);
   return (
     <div className="navbar">
@@ -21,7 +21,7 @@ function NavBar() {
           className="navbar__link"
           activeClassName="navbar__link--active"
         >
-    Home
+          Home
         </NavLink>
       </li>
 
@@ -43,16 +43,16 @@ function NavBar() {
       {
         userID ? (
           <li className="navbar__link-wrapper">
-            <Link
-              to="/"
+            <a
+              href="/"
               className="navbar__link"
               onClick={() => {
                 localStorage.removeItem(GC_USER_ID);
                 localStorage.removeItem(GC_AUTH_TOKEN);
               }}
             >
-            Logout
-            </Link>
+              Logout
+            </a>
           </li>
         ) : (
           <li className="navbar__link-wrapper">
@@ -61,7 +61,7 @@ function NavBar() {
               className="navbar__link"
               activeClassName="navbar__link--active"
             >
-            Login
+              Login
             </NavLink>
           </li>
         )

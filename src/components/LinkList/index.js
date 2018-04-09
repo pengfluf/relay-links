@@ -142,7 +142,7 @@ export default createPaginationContainer(
       };
     },
 
-    getVariables(props, paginationInfo, fragmentVariables) {
+    getVariables(props, paginationInfo) {
       return {
         count: paginationInfo.count,
         after: paginationInfo.cursor,

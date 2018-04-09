@@ -25,9 +25,7 @@ class LinkCustom extends React.Component {
       voteErrorTimeout: 0,
     };
 
-    this.userCanVoteOnLink = this.userCanVoteOnLink.bind(this);
     this.voteForLink = this.voteForLink.bind(this);
-    this.setState = this.setState.bind(this);
   }
 
   async userCanVoteOnLink(userId, linkId) {

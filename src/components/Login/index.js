@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants';
 import { handleChangeInput } from '../../utils';
@@ -21,7 +22,6 @@ class Login extends React.Component {
     this.setState = this.setState.bind(this);
     this.confirm = this.confirm.bind(this);
     this.confirmOnEnter = this.confirmOnEnter.bind(this);
-    this.saveUserData = this.saveUserData.bind(this);
     this.switchUI = this.switchUI.bind(this);
   }
 
@@ -148,5 +148,11 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+};
 
 export default Login;

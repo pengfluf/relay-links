@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 import {
@@ -9,7 +9,7 @@ import {
 
 import './style.css';
 
-function NavBar(props) {
+function NavBar() {
   const userID = localStorage.getItem(GC_USER_ID);
   return (
     <div className="navbar">

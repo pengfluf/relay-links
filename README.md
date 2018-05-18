@@ -21,5 +21,5 @@ yarn start
 ```
 OR
 ``` bash
-npm install
+npm start
 ```
